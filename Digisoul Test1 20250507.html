@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <meta name="description" content="Live2D with intellegence|Hanazar Products">
+  <meta name="autuor" content="Hanazar Ochikawa">
+  <link rel="stylesheet" href="Digisoul Test1 20250511.css">
+  <title>Digital soul | Better Live2d | Hanazar Ochikawa Products</title>
+</head>
+<body>
+  <div>
+    <audio id="bgm" autoplay loop>
+  <source src="bgm1.MP3" type="audio/MP3">
+</audio>
+
+  </div>
+  <div class="chatbox1">
+    <p>chat box 1</p>
+  </div>
+
+  <div class="side-menu">
+  <h2><span style="color: black; font-size: 30px;">Digisoul</span><br><span style="color: blue;">Hanazar Products</span></h2>
+  <ul class="menu-content">
+    <li>settings</li>
+    <p class="menu-content-info">UI</p>
+    <li>Character List</li>
+    <p class="menu-content-info">Developing</p>
+    <li>Costume List</li>
+    <p class="menu-content-info">Developing</p>
+    <li>About</li>
+    <p class="menu-content-info">Developing</p>
+    <li>Tools Bar</li>
+    <p class="menu-content-info">Upper part of website</p>
+    <li>Github</li>
+    <p class="menu-content-info">made a link to my acc</p>
+    <li>Q&A</li>
+    <p class="menu-content-info">I will made my blog</p>
+  </ul>
+  <br>
+  <br>
+  <br>
+    <h3>Copyright 2025<br>Hanazar Ochikawa</h3>
+</div>
+
+  <canvas id="live2dCanvas"></canvas>
+  <!-- Live2D 渲染核心 -->
+  <script src="live2d/live2dcubismcore.min.js"></script>
+  <!-- Live2D 加载器 -->
+  <script src="live2d/live2d.min.js"></script>
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const canvas = document.getElementById("live2dCanvas");
+      // 同步 canvas 元素的分辨率与 CSS 大小一致
+      canvas.width  = canvas.clientWidth;
+      canvas.height = canvas.clientHeight;
+
+      loadlive2d("live2dCanvas", "Tia/index.json");
+    });
+  </script>
+</body>
+</html>

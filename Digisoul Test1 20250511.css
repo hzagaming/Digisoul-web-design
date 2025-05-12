@@ -1,0 +1,120 @@
+html, body {
+      margin: 0;
+      padding: 0;
+      width: 100%;
+      height: 100%;
+      background: #00ccff;
+      overflow: hidden;
+    }
+    /* 将画布定宽高，并居中显示 */
+    #live2dCanvas {
+  position: absolute;
+  z-index: 1;
+  width: 850x;
+  max-width: 50%;
+  height: 1000px;
+  max-height: 85%;
+  bottom: 0%;              /* 紧贴底部 */
+  left: 50%;              /* 横向居中 */
+  transform: translateX(-50%);  /* 只在横向居中 */
+  background: #00ccff;
+  transform: translateX(-250%); /* 初始在右侧之外 */
+  animation: slideInLeft 1.5s ease-out forwards 0s;
+}
+
+@keyframes slideInLeft {
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+
+   .chatbox1 {
+  position: absolute;
+  z-index: 2;
+  width: 200px;
+  height:1000px;
+  bottom: 0%;
+  top: 3%;       
+  right: 2%;        
+  max-width: 35%;    /* 最大宽度为视口宽度的25% */
+  max-height: 90%;
+  height:85%;
+  padding: 30px;
+  background-color: rgb(0, 166, 255);
+  border: 2px solid #0024ef;
+  border-radius: 20px;  /* 圆角 */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  font-size: 1rem;      /* 随整体缩放 */
+  line-height: 1.4;
+  word-break: break-word;
+   transform: translateX(250%); /* 初始在右侧之外 */
+  animation: slideIn 1.5s ease-out forwards 0s;
+}
+
+/* 动画关键帧 */
+@keyframes slideIn {
+  to {
+    transform: translateX(0); /* 动到原位 */
+  }
+}
+
+
+
+.side-menu {
+  position: absolute;
+  z-index: 2;
+  bottom: 0%;
+  top: -5%;       
+  left: 0%;        
+  max-width: 35vw;    /* 最大宽度为视口宽度的25% */
+  min-width: 200px;   /* 最小宽度，避免过小 */
+  height: 1500px;
+  max-height: 340%;
+  padding: 30px;
+  background-color: hsl(196, 100%, 42%);
+  color: rgb(147, 201, 255);
+  padding: 20px;
+  box-shadow: -4px 0 10px rgba(0, 0, 0, 0.3);
+  font-size: 1rem;          /* 固定字体大小 */
+  transform: translateY(-140%);
+  animation: slideDownMenu 1.5s ease-out forwards 1s;
+}
+
+@keyframes slideDownMenu {
+  to {
+    transform: translateY(0);
+  }
+}
+
+.right-menu ul {
+  list-style: none;
+  padding: 0;
+  margin-top: 20px;
+}
+
+.right-menu li {
+  margin: 15px 0;
+}
+
+
+
+
+h3{
+    font-size: 10px;
+    bottom: 10px;
+    top: 50px;
+}
+
+
+
+.menu-content{
+    font-size: 20px;
+    color: rgb(186, 218, 255);
+}
+
+
+.menu-content-info{
+    font-size: 13px;
+    color: rgb(133, 194, 255);
+}
