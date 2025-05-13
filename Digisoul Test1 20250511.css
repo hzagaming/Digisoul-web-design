@@ -3,7 +3,7 @@ html, body {
       padding: 0;
       width: 100%;
       height: 100%;
-      background: #00ccff;
+      background-image: url("bgp.png");
       overflow: hidden;
     }
     /* 将画布定宽高，并居中显示 */
@@ -17,7 +17,6 @@ html, body {
   bottom: 0%;              /* 紧贴底部 */
   left: 50%;              /* 横向居中 */
   transform: translateX(-50%);  /* 只在横向居中 */
-  background: #00ccff;
   transform: translateX(-250%); /* 初始在右侧之外 */
   animation: slideInLeft 1.5s ease-out forwards 0s;
 }
@@ -41,8 +40,8 @@ html, body {
   max-height: 90%;
   height:85%;
   padding: 30px;
-  background-color: rgb(0, 166, 255);
-  border: 2px solid #0024ef;
+  background-color: rgba(255, 255, 255, 0.575);
+  border: 2px solid #ffffff9c;
   border-radius: 20px;  /* 圆角 */
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
   font-size: 1rem;      /* 随整体缩放 */
@@ -72,8 +71,8 @@ html, body {
   height: 1500px;
   max-height: 340%;
   padding: 30px;
-  background-color: hsl(196, 100%, 42%);
-  color: rgb(147, 201, 255);
+  background-color: hsla(0, 0%, 74%, 0.643);
+  color: rgba(236, 236, 236, 0.492);
   padding: 20px;
   box-shadow: -4px 0 10px rgba(0, 0, 0, 0.3);
   font-size: 1rem;          /* 固定字体大小 */
@@ -110,11 +109,11 @@ h3{
 
 .menu-content{
     font-size: 20px;
-    color: rgb(186, 218, 255);
+    color: rgba(255, 255, 255, 0.877);
 }
 
 
 .menu-content-info{
     font-size: 13px;
-    color: rgb(133, 194, 255);
+    color: rgba(237, 246, 255, 0.729);
 }
