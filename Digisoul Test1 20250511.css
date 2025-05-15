@@ -99,11 +99,33 @@ html, body {
   margin: 15px 0;
 }
 
+
+
 .chatbox1-info{
-  font-style: oblique;
+  font-style: normal;
   color: #ffffffb0;
-  font-size: 20px;
-  animation:  0.3s  0s   ease-in;
+  font-size: 16px;
+  display: inline-block;            /* 保持字符行内排列 */
+  animation-name: fadeInChar;
+  animation-duration: 4s;         /* 单个字符动画时长 */
+  animation-fill-mode: forwards;    /* 保持最终状态 */
+}
+
+
+/*渐显定义*/
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/*逐字渐显定义*/
+@keyframes fadeInChar {
+  from { opacity: 0; }
+  to   { opacity: 1; }
 }
 
 
