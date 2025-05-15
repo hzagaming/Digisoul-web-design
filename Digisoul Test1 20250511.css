@@ -99,7 +99,12 @@ html, body {
   margin: 15px 0;
 }
 
-
+.chatbox1-info{
+  font-style: oblique;
+  color: #ffffffb0;
+  font-size: 20px;
+  animation:  0.3s  0s   ease-in;
+}
 
 
 h3{
