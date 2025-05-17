@@ -1,0 +1,17 @@
+暂时不用java：
+
+
+暂时不用html：
+
+
+暂时不用CSS：
+
+.chatbox1-info{
+  font-style: normal;
+  color: #ffffffb0;
+  font-size: 16px;
+  display: inline-block;            /* 保持字符行内排列 */
+  animation-name: fadeInChar;
+  animation-duration: 4s;         /* 单个字符动画时长 */
+  animation-fill-mode: forwards;    /* 保持最终状态 */
+}
