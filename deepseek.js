@@ -1,6 +1,6 @@
 // deepseek.js
 export async function getDeepSeekResponse(userText) {
-  const ENDPOINT = 'http://localhost:3000/api/deepseek'; // 使用本地代理
+  const ENDPOINT = 'https://api.deepseek.com/chat/completions'; // vercel代理
 
   try {
     const resp = await fetch(ENDPOINT, {
@@ -57,12 +57,12 @@ export async function getDeepSeekResponse(userText) {
   } catch (error) {
     console.error('DeepSeek 调用失败：', error);
     const msg = error.message || '';
-    if (msg.includes('未授权'))       return '抱歉，API Key 无效，请检查配置。';
-    if (msg.includes('余额不足'))     return '抱歉，您的账户余额不足，请充值后重试。';
+    if (msg.includes('未授权'))       return '抱歉，开发者给我的记忆失效了，请开发者检查配置。';
+    if (msg.includes('余额不足'))     return '抱歉，开发者账户余额不足，请充值后重试。';
     if (msg.includes('权限不足'))     return '抱歉，您无权访问该资源。';
-    if (msg.includes('请求过于频繁')) return '系统繁忙，请稍后再试。';
-    if (msg.includes('返回格式异常')) return '抱歉，AI 回复格式异常。';
-    return '抱歉，获取回复时出现问题。';
+    if (msg.includes('请求过于频繁')) return '系统开小差了呢，请稍后再试。';
+    if (msg.includes('返回格式异常')) return '抱歉，我的回复格式突然异常了。';
+    return '抱歉，我获取回复时出现问题了。';
   }
 }
 
