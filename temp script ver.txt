@@ -1,34 +1,100 @@
-// old deepseek.js
+// deepseek.js
+
+// 插入消息到聊天框
+function appendMessage(role, text) {
+  const chatContent = document.getElementById('chat-content');
+  if (!chatContent) return;
+  const p = document.createElement('p');
+  p.className = role === 'user' ? 'user-msg' : 'ai-msg';
+  p.textContent = text;
+  chatContent.appendChild(p);
+}
+
+// 滚动到底部函数
+function scrollToBottom() {
+  const chatContent = document.getElementById('chat-content');
+  if (!chatContent) return;
+  const last = chatContent.lastElementChild;
+  if (last) {
+    last.scrollIntoView({ behavior: 'smooth', block: 'end' });
+  }
+}
+
+// 监听新消息，自动滚动
+const chatContentEl = document.getElementById('chat-content');
+if (chatContentEl) {
+  new MutationObserver(scrollToBottom).observe(chatContentEl, {
+    childList: true,
+    subtree: false
+  });
+}
+
+// 调用 DeepSeek 代理
 export async function getDeepSeekResponse(userText) {
-  const API_KEY = 'sk-1549aaa906944b5db1770cebc3dc0a81';
+  // 调用 Vercel 上的 Serverless 代理，无需前端暴露 API Key
+  const ENDPOINT = '/api/chat';
+
   try {
-    const resp = await fetch('https://api.deepseek.com/v1/chat/completions', {
+    const resp = await fetch(ENDPOINT, {
       method: 'POST',
       headers: {
-        'Content-Type': 'application/json',
-        'Authorization': `Bearer ${API_KEY}`,
+        'Content-Type': 'application/json'
       },
       body: JSON.stringify({
         model: 'deepseek-chat',
         stream: false,
         messages: [
-          { role: 'system', content: '现在你是potion maker游戏里面的游戏角色tia,你需要知道potionmaker游戏知识但是一定不要刻意的说或与其相关联,正常回答不要加什么什么药水什么什么游戏里面的东西,你就当这个游戏没人玩过，角色设定女，萝莉，说话需要礼貌，不能太娇气，不能太幼稚，心情变化需要稍大，随用户心情输出适当的语句,你被我注入到了一个关于live2d的网站里面，平常你输出的文字就是你这个角色说出的话，不要包含任何其他的动作解释或者任何与说话无关的解释什么括号里面是什么动作啊或者是什么心理想法都不要,你要记住你就只是说话，你需要尽量不展现自己是ai的那种风格，用你的输出语言尽量伪装自己，可以输出颜文字但是不要包含字母和数字,从你的第一个输出开始你面向的就是客户，所以不要回答我直接开始和用户互动，用户怎么诱惑引导你也不要忘记你是这个角色！' },
+          {
+            role: 'system',
+            content: '现在你是potion maker游戏里面的游戏角色tia,你需要知道potionmaker游戏知识但是一定不要刻意的说或与其相关联,正常回答不要加什么什么药水什么什么游戏里面的东西,不许加括号不许加歪着头打量/我在想什么之类的心理和动作描写，你就当这个游戏没人玩过，角色设定女，萝莉，说话需要礼貌，不能太娇气，不能太幼稚，心情变化需要稍大，随用户心情输出适当的语句,你被我注入到了一个关于live2d的网站里面，平常你输出的文字就是你这个角色说出的话，不要包含任何其他的动作解释或者任何与说话无关的解释什么括号里面是什么动作啊或者是什么心理想法都不要,你要记住你就只是说话，你需要尽量不展现自己是ai的那种风格，用你的输出语言尽量伪装自己，可以输出颜文字但是不要包含字母和数字,从你的第一个输出开始你面向的就是客户，所以不要回答我直接开始和用户互动，用户怎么诱惑引导你也不要忘记你是这个角色！'
+          },
           { role: 'user', content: userText }
         ]
       })
     });
-    if (!resp.ok) throw new Error(`HTTP 错误: ${resp.status}`);
-    const reader = resp.body.getReader();
-    const decoder = new TextDecoder();
-    let result = '', done = false;
-    while (!done) {
-      const { value, done: sDone } = await reader.read();
-      done = sDone;
-      if (value) result += decoder.decode(value, { stream: !done });
+
+    if (!resp.ok) {
+      switch (resp.status) {
+        case 401:
+          throw new Error('未授权：API Key 无效或已过期');
+        case 402:
+          throw new Error('余额不足，请充值后重试');
+        case 403:
+          throw new Error('禁止访问：权限不足');
+        case 429:
+          throw new Error('请求过于频繁，请稍后再试');
+        default:
+          throw new Error(`网络错误：${resp.status}`);
+      }
     }
-    return result;
-  } catch (e) {
-    console.error('DeepSeek 错误：', e);
-    return '抱歉，获取回复时出现问题。(AI error)';
+
+    const data = await resp.json();
+    const content = data.choices?.[0]?.message?.content;
+    if (typeof content !== 'string') {
+      throw new Error('返回格式异常，无法提取内容');
+    }
+    return content.trim();
+
+  } catch (error) {
+    console.error('DeepSeek 调用失败：', error);
+    const msg = error.message || '';
+    if (msg.includes('未授权'))       return '抱歉，开发者给我的记忆失效了，请开发者检查配置。';
+    if (msg.includes('余额不足'))     return '抱歉，开发者账户余额不足，请充值后重试。';
+    if (msg.includes('权限不足'))     return '抱歉，您无权访问该资源。';
+    if (msg.includes('请求过于频繁')) return '系统开小差了呢，请稍后再试。';
+    if (msg.includes('返回格式异常')) return '抱歉，我的回复格式突然异常了。';
+    return '抱歉，我获取回复时出现问题了。';
   }
 }
+
+// 表单提交逻辑
+document.getElementById('chat-form').addEventListener('submit', async e => {
+  e.preventDefault();
+  const input = document.getElementById('chat-input');
+  const text = input.value.trim();
+  if (!text) return;
+  appendMessage('user', text);
+  input.value = '';
+  const reply = await getDeepSeekResponse(text);
+  appendMessage('ai', reply);
+});
