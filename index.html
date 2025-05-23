@@ -11,18 +11,149 @@
   <script type="module" src="app.js" defer></script>
 </head>
 <body>
+
+
+
+
+
+
+  <!--audio system-->
   <div>
-    <audio id="bgm" autoplay loop>
-  <source src="bgmselfuse4.MP3" type="audio/MP3">
-</audio>
-
+    <button class="audio-button"
+        onclick="
+          const a = document.getElementById('bgm');
+          a.currentTime = 0;
+          a.play();
+        ">
+  *
+</button>
+<!-- 预加载、不自动播放 -->
+<audio id="bgm" src="bgmselfuse4.MP3" preload="auto" ></audio>
   </div>
+
+
+
+  <div>
+    <button class="audio-button2"
+        onclick="
+          const a = document.getElementById('bgm2');
+          a.currentTime = 0;
+          a.play();
+        ">
+  **
+</button>
+<!-- 预加载、不自动播放 -->
+<audio id="bgm2" src="bgmdev1.MP3" preload="auto" ></audio>
+  </div>
+
+
+
+ <div>
+    <button class="audio-button3"
+        onclick="
+          const a = document.getElementById('bgm3');
+          a.currentTime = 0;
+          a.play();
+        ">
+  ***
+</button>
+<!-- 预加载、不自动播放 -->
+<audio id="bgm3" src="bgmdev2.MP3" preload="auto" ></audio>
+  </div>
+
+
+
+ <div>
+    <button class="audio-button4"
+        onclick="
+          const a = document.getElementById('bgm4');
+          a.currentTime = 0;
+          a.play();
+        ">
+  ****
+</button>
+<!-- 预加载、不自动播放 -->
+<audio id="bgm3" src="bgmdev3.mp3" preload="auto" ></audio>
+  </div>
+
+
+
+
+
+  
+
+ <div><!--空闲中-->
+    <button class="audio-button5"
+        onclick="
+          const a = document.getElementById('bgm5');
+          a.currentTime = 0;
+          a.play();
+        ">
+  *****
+</button>
+<!-- 预加载、不自动播放 -->
+<audio id="bgm3" src="bgmdev3.mp3" preload="auto" ></audio>
+  </div>
+
+
+
+
+
+
+
+
+
+
+  <!--chatbox-right-->
   <div class="chatbox1" id="chatbox1">
-    <p class="chatbox1-info">1111</p>
+      <div id="chat-content">
+    <p>2025年5月17日第一次release公告：<br>
+    美化所有菜单栏颜色/字体颜色<br>
+  调教4.0版本<br>
+后续更新请关注github：hzagaming<br>
+更多功能将预计在6月前编写完成<br>
+偷偷设置了一个彩蛋（屏幕左上角标题地方）但是因为分辨率缘故position没有设置为absolute，所以部分机型无法reach到彩蛋尽请谅解
+<br>
+<br>
+<br>
+现在打下你的第一个字开始您的聊天吧！</p>
+  </div>
+  <form id="chat-form">
+    <input
+      type="text"
+      id="chat-input"
+      placeholder="你要说什么呢......"
+      autocomplete="off"
+      required
+    />
+    <button type="submit">说</button>
+  </form>
+
+
+
+
+
+
+
+  </div><!--重要物件不要删除（虽然没用但是大有用处）！！-->
+    <p class="chatbox1-info"></p>
+    <!--这个东西居然可以顶住网页防止sidemenu 和 chatbox挤在一起！！wtf？？？-->
   </div>
 
+
+
+
+
+
+
+  <!--sidemenu-left-->
   <div class="side-menu">
-  <h2><span style="color: rgb(82, 41, 0); font-size: 30px;">Digisoul</span><br><span style="color: rgba(255, 106, 0, 0.622);">Hanazar Products</span></h2>
+  <h2>
+    <span style="color: rgb(83, 41, 0); font-size: 30px;">Digisoul</span>
+    <br>
+    <span style="color: rgb(117, 49, 0);">Hanazar Products</span>
+  </h2>
+  
   <ul class="menu-content">
     <li>settings</li>
     <p class="menu-content-info">UI</p>
@@ -44,6 +175,8 @@
   <br>
     <h3>Copyright 2025<br>Hanazar Ochikawa</h3>
 </div>
+
+
 
   <canvas id="live2dCanvas"></canvas>
   <!-- Live2D 渲染核心 -->
